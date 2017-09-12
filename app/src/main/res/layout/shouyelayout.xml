@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F00">
-     <TextView
+    android:orientation="vertical" >
+
+     <!-- ListFragment对应的android:id值固定为"@id/android:list" -->
+     <fragment
+         android:name="com.example.peng.phpackage.fragment.ShouYeFragment"
+         android:id="@+id/fragment1"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         android:text="首页"/>
+         />
+
 </LinearLayout>

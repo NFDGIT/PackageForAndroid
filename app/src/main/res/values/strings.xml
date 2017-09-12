@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PHPackAge</string>
+    <string name="shouyecellbtn">删除</string>
 </resources>

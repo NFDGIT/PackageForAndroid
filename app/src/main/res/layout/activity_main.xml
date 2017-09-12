@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,14 +15,33 @@
         tools:layout_editor_absoluteX="8dp">
 
         <include layout="@layout/topnavi"/>
-        <android.support.v4.view.ViewPager
+        <com.example.peng.phpackage.Base.BaseViewPager
             android:id="@+id/mp_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#888">
-        </android.support.v4.view.ViewPager>
+        </com.example.peng.phpackage.Base.BaseViewPager>
 
         <include layout="@layout/bottombar" />
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+    <ListView
+    android:id="@+id/list_left_drawer"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#080808"
+    android:choiceMode="singleChoice"
+    android:divider="#FFFFFF"
+    android:dividerHeight="1dp" />
+    <ListView
+        android:id="@+id/list_right_drawer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="#080808"
+        android:choiceMode="singleChoice"
+        android:divider="#000000"
+        android:dividerHeight="1dp" />
+
+</android.support.v4.widget.DrawerLayout>

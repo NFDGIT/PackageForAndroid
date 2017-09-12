@@ -37,4 +37,8 @@ public class MainPagerAdapter extends PagerAdapter {
         container.removeView(viewList.get(position));
 //        super.destroyItem(container, position, object);
     }
+
+
+
+
 }

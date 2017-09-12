@@ -1,13 +1,15 @@
 package com.example.peng.phpackage;
 
 import android.app.Activity;
-import android.app.DownloadManager;
-import android.app.ProgressDialog;
+
+import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Looper;
 import android.os.Message;
-import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.Fragment;
+
 import android.support.v4.view.ViewPager;
 //import android.support.v7.app.AppCompatActivity;
 
@@ -19,30 +21,25 @@ import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewParent;
+
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
 import android.widget.Toast;
 
+import com.example.peng.phpackage.Base.BaseViewPager;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainActivity extends Activity {
 
-    private ViewPager mPager;
+    private BaseViewPager mPager;
     private ArrayList<View> viewList;
+    private ArrayList<Fragment> fragList;
     public static MainActivity MAINACTIVITY;
     public static Context sContext;
 
@@ -55,95 +52,84 @@ public class MainActivity extends Activity {
 
         initView();
         initEvents();
-
-
     }
 
     private void initEvents() {
         sContext = getApplicationContext();
 
-        ImageButton backBtn = findViewById(R.id.topnavi_back);
+
+
+        ImageButton backBtn =(ImageButton) findViewById(R.id.topnavi_back);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,BaseActivity.class));
+//
+//                Intent intent = new Intent(MainActivity.this,BaseActivity.class);
+//
+//
+//                intent.setAction(Intent.ACTION_CALL);
+                startActivity(new Intent(getApplicationContext(),BaseActivity.class));
+
+
+//                PHAlert editNameDialog = new PHAlert();
+//                editNameDialog.show(getFragmentManager(),"");
+//                editNameDialog.callBack=new com.example.peng.phpackage.Request.CallBack() {
+//                    @Override
+//                    public void successed(Object obj) {
+//                  Toast.makeText(getApplicationContext(),obj.toString(),Toast.LENGTH_LONG).show();
+//                    }
+//
+//                    @Override
+//                    public void faild(IOException e) {
+//
+//                    }
+//                };
+
+
+
+
             }
         });
 
-        ImageButton rightBtn = findViewById(R.id.topnavi_rightBtn);
+
+
+        ImageButton rightBtn = (ImageButton) findViewById(R.id.topnavi_rightBtn);
         rightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                JSONObject parm = new JSONObject();
+                try {
+                    parm.putOpt("userid","2");
 
-               Log.i("wang","网络访问前:"+ Thread.currentThread().toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
+                Log.i("peng","网络访问前:"+ Thread.currentThread().toString());
 
-
-
-                com.example.peng.phpackage.Request.getWithParm("http://www.baidu.com", "", new JSONObject(), new com.example.peng.phpackage.Request.CallBack() {
+                com.example.peng.phpackage.Request.get("http://www.shp360.com/MshcShopGuanjia/", "Zonghe_savedefaulttongzhi.action", parm, new com.example.peng.phpackage.Request.CallBack() {
                     @Override
                     public void successed(Object obj) {
-                        Log.i("wang",obj.toString());
-                        Log.i("wang","网络访问后:"+ Thread.currentThread().toString());
-
-
+                        Log.i("peng",obj.toString());
+                        Log.i("peng","网络访问后:"+ Thread.currentThread().toString());
 
 
                         Looper.prepare();
-                        Toast.makeText(MainActivity.this, obj.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(sContext, obj.toString(), Toast.LENGTH_SHORT).show();
                         Looper.loop();
 
-                       // Toast.makeText(MAINACTIVITY,"heello swift",Toast.LENGTH_LONG).show();
 
-//                        try{
-//                            android.os.Handler myHandle = new android.os.Handler(){
-//                                @Override
-//                                public void handleMessage(Message msg) {
-//                                    super.handleMessage(msg);
-//
-//
-//                                }
-//                            };
-//
-//
-//
-////                            Handler myHandler = new Handler() {
-////                                public void handleMessage(NotificationCompat.MessagingStyle.Message msg) {
-////                                    switch (msg.what) {
-////                                        case TestHandler.GUIUPDATEIDENTIFIER:
-////                                            myBounceView.invalidate();
-////                                            break;
-////                                    }
-////                                    super.handleMessage(msg);
-////                                }
-////                            };
-//
-//
-//
-//
-//
-//                        }catch(Exception e){
-//                            Log.i("wang",e.toString());
-//                        }
-
-//
                     }
 
                     @Override
                     public void faild(IOException e) {
-                        Log.i("wang",e.toString());
+                        Log.i("peng",e.toString());
 
 
 //                        Toast.makeText(MainActivity.this,e.toString(),Toast.LENGTH_LONG).show();
                     }
                 });
-
-
-
-
-
-
             }
 
 
@@ -154,14 +140,11 @@ public class MainActivity extends Activity {
         });
 
 
+        LinearLayout tab1 =(LinearLayout) findViewById(R.id.tab1);
+        LinearLayout tab2 =(LinearLayout) findViewById(R.id.tab2);
+        LinearLayout tab3 =(LinearLayout) findViewById(R.id.tab3);
 
 
-
-
-
-        LinearLayout tab1 = findViewById(R.id.tab1);
-        LinearLayout tab2 = findViewById(R.id.tab2);
-        LinearLayout tab3 = findViewById(R.id.tab3);
 
         tab1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,7 +176,12 @@ public class MainActivity extends Activity {
 
     private void initView() {
 
-        mPager = (ViewPager) findViewById(R.id.mp_main);
+
+
+        mPager = (BaseViewPager) findViewById(R.id.mp_main);
+        mPager.isCanScroll = false;
+
+
 
         viewList = new ArrayList<View>();
 
@@ -203,26 +191,22 @@ public class MainActivity extends Activity {
         viewList.add(li.inflate(R.layout.gouwuche,null,false));
         viewList.add(li.inflate(R.layout.person,null,false));
 
+
+        fragList = new ArrayList<Fragment>();
+//        viewList.add()
+
+
+
         MainPagerAdapter pagerAda = new MainPagerAdapter(viewList);
-
-
-
-
-
-
-
         mPager.setAdapter(pagerAda);
 
-        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 seleTabBarWithIndex(position);
-
             }
-
-
 
             @Override
             public void onPageSelected(int position) {
@@ -230,17 +214,9 @@ public class MainActivity extends Activity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
+
         });
-
-
-
-//
-
-
-
-
 
 
 
@@ -251,9 +227,10 @@ public class MainActivity extends Activity {
         mPager.setCurrentItem(index,false);
     }
     private void seleTabBarWithIndex(int index) {
-        ImageButton tabImg1 = findViewById(R.id.tab1img);
-        ImageButton tabImg2 = findViewById(R.id.tab2img);
-        ImageButton tabImg3 = findViewById(R.id.tab3img);
+
+        ImageButton tabImg1 =(ImageButton) findViewById(R.id.tab1img);
+        ImageButton tabImg2 =(ImageButton) findViewById(R.id.tab2img);
+        ImageButton tabImg3 =(ImageButton) findViewById(R.id.tab3img);
 
         tabImg1.setImageResource(R.mipmap.ic_launcher_round);
         tabImg2.setImageResource(R.mipmap.ic_launcher_round);
@@ -272,6 +249,7 @@ public class MainActivity extends Activity {
         }
 
     }
+
 
 
 }
