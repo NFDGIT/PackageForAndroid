@@ -4,9 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F0">
-     <TextView
+    android:background="@color/colorBack">
+     <fragment
+         android:id="@+id/gouwucheweb"
+         android:name="com.example.peng.phpackage.fragment.WebFragment"
          android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:text="购物车"/>
+         android:layout_height="match_parent">
+
+     </fragment>
+
 </LinearLayout>

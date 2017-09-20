@@ -1,8 +1,10 @@
 package com.example.peng.phpackage.adapter;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.peng.phpackage.OrderDetailActivity;
 import com.example.peng.phpackage.R;
 
 import java.util.ArrayList;
@@ -83,15 +86,19 @@ public class ShouYeFragmentAdapter extends BaseAdapter {
             @Override
             public void onClick(final View view) {
 
-                new AlertDialog.Builder(inflater.getContext())
-                        .setTitle("我的listview")
-                        .setMessage("第"+ i +"个")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        })
-                        .show();
+
+                inflater.getContext().startActivity(new Intent(inflater.getContext(), OrderDetailActivity.class));
+
+
+//                new AlertDialog.Builder(inflater.getContext())
+//                        .setTitle("我的listview")
+//                        .setMessage("第"+ i +"个")
+//                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                            }
+//                        })
+//                        .show();
 
 //                Toast.makeText(inflater.getContext(),"hello",Toast.LENGTH_LONG).show();
             }

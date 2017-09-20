@@ -4,22 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.peng.phpackage.Base.BaseActivity">
-    <LinearLayout
+    tools:context="com.example.peng.phpackage.activity.WebActivity">
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp">
-        <include layout="@layout/topnavi"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/colorBack">
-        </View>
-    </LinearLayout>
 
-
+    </WebView>
 
 </android.support.constraint.ConstraintLayout>

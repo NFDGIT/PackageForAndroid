@@ -2,12 +2,9 @@ package com.example.peng.phpackage;
 
 import android.app.Activity;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Looper;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 
 import android.support.v4.view.ViewPager;
@@ -17,7 +14,6 @@ import android.support.v4.view.ViewPager;
 
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +23,10 @@ import android.widget.LinearLayout;
 
 import android.widget.Toast;
 
+import com.example.peng.phpackage.Base.BaseActivity;
 import com.example.peng.phpackage.Base.BaseViewPager;
+import com.example.peng.phpackage.activity.WebActivity;
+import com.example.peng.phpackage.adapter.MainPagerAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,27 +62,12 @@ public class MainActivity extends Activity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//
-//                Intent intent = new Intent(MainActivity.this,BaseActivity.class);
-//
-//
-//                intent.setAction(Intent.ACTION_CALL);
-                startActivity(new Intent(getApplicationContext(),BaseActivity.class));
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, WebActivity.class);
+                intent.putExtra("url","http://www.baidu.com");
 
-
-//                PHAlert editNameDialog = new PHAlert();
-//                editNameDialog.show(getFragmentManager(),"");
-//                editNameDialog.callBack=new com.example.peng.phpackage.Request.CallBack() {
-//                    @Override
-//                    public void successed(Object obj) {
-//                  Toast.makeText(getApplicationContext(),obj.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//
-//                    @Override
-//                    public void faild(IOException e) {
-//
-//                    }
-//                };
+                startActivity(intent);
+//                startActivity(new Intent(getApplicationContext(),BaseActivity.class));
 
 
 

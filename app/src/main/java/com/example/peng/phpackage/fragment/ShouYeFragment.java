@@ -23,12 +23,8 @@ import java.util.Map;
 
 public class ShouYeFragment extends ListFragment {
     @Override
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.shouyefragmentlayout,container,false);
-
-
-
 //        return  inflater.inflate()
 
 
@@ -38,7 +34,6 @@ public class ShouYeFragment extends ListFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 //        final String[] from = new String[] {"img","title","info"};
 //        final int[] to   = new  int[] {R.id.img,R.id.title,R.id.info};
 //        SimpleAdapter adapter = new SimpleAdapter(this.getActivity(),getSimpleData(),R.layout.shouyecelllayout,from,to);
